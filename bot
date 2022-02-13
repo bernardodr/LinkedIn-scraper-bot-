@@ -1,0 +1,29 @@
+import pandas as np
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+import re as re
+
+#webdriver
+#add link
+browser = webdriver.Chrome(executable_path='C:/Users/berna/Downloads/chromedriver_win32/chromedriver.exe')
+browser.get('https://www.linkedin.com')
+
+#login
+username = browser.find_element_by_id('session_key')
+username.send_keys("****@gmail.com")
+password = browser.find_element_by_id("session_password")
+password.send_keys("123456789ASDF")
+
+login_button=browser.find_element_by_class_name("sign-in-form__submit-button")
+login_button.click()
+
+#search for posts
+URL = input('Enter Company URL for Posts')
+browser.get(URL)
+post = browser.find_elements_by_class_name("break-words")
+c = []
+for i in post:
+    c.append(i.text)
+print(c)
